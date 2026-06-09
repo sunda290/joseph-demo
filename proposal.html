@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Joseph Bucci — Proposal</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500&family=Archivo:wght@400;500;600&display=swap');
+
+:root{
+  --paper:#f4f2ee; --card:#fbfaf8; --ink:#16130f; --soft:#79716a;
+  --line:rgba(22,19,15,0.16);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{-webkit-font-smoothing:antialiased;}
+body{background:#ddd9d2;font-family:'Archivo',sans-serif;color:var(--ink);padding:32px 16px 90px;}
+
+.sheet{
+  max-width:860px;margin:0 auto 34px;background:var(--paper);
+  padding:64px clamp(28px,6vw,72px) 56px;
+  box-shadow:0 24px 70px rgba(0,0,0,0.22);
+}
+
+.serif{font-family:'Fraunces',serif;}
+.label{font-size:11px;letter-spacing:0.3em;text-transform:uppercase;color:var(--soft);font-weight:500;}
+
+/* header */
+.head{display:flex;justify-content:space-between;align-items:flex-start;border-bottom:1px solid var(--line);padding-bottom:26px;margin-bottom:40px;}
+.mark{font-family:'Fraunces',serif;font-weight:500;font-size:30px;letter-spacing:-0.02em;line-height:1;}
+.head .right{text-align:right;}
+.head .right .pg{font-size:11px;color:var(--soft);margin-top:6px;letter-spacing:0.18em;}
+
+h1{font-family:'Fraunces',serif;font-weight:300;font-size:clamp(34px,6vw,56px);line-height:1.04;letter-spacing:-0.02em;margin:30px 0 20px;max-width:18ch;}
+.deck{font-size:16px;line-height:1.65;color:#3b3631;max-width:60ch;}
+.deck b{font-weight:500;color:var(--ink);}
+
+/* sections */
+.sec{display:grid;grid-template-columns:54px 1fr;gap:20px;padding:34px 0;border-top:1px solid var(--line);}
+.sec:first-of-type{margin-top:44px;}
+.no{font-family:'Fraunces',serif;font-size:18px;color:var(--soft);font-weight:400;padding-top:3px;}
+.sec h2{font-family:'Fraunces',serif;font-weight:400;font-size:25px;letter-spacing:-0.01em;margin-bottom:12px;}
+.sec p{font-size:14.5px;line-height:1.66;color:#3b3631;max-width:62ch;}
+.sec p + p{margin-top:10px;}
+
+ul.flow{list-style:none;margin-top:6px;}
+ul.flow li{font-size:14.5px;line-height:1.5;padding:9px 0 9px 26px;position:relative;border-bottom:1px dashed var(--line);color:#3b3631;}
+ul.flow li:last-child{border-bottom:0;}
+ul.flow li:before{content:"";position:absolute;left:0;top:16px;width:8px;height:8px;border:1.4px solid var(--ink);}
+ul.flow li b{color:var(--ink);font-weight:500;}
+
+.two{display:grid;grid-template-columns:1fr 1fr;gap:30px;}
+@media(max-width:640px){.two{grid-template-columns:1fr;gap:20px;}.sec{grid-template-columns:1fr;gap:10px;}.no{display:none;}}
+
+.callout{background:var(--card);border:1px solid var(--line);padding:16px 18px;margin-top:14px;font-size:13px;line-height:1.6;color:#3b3631;}
+.callout b{color:var(--ink);font-weight:500;}
+
+/* phases */
+.phase{display:flex;gap:14px;align-items:baseline;padding:10px 0;border-bottom:1px dashed var(--line);}
+.phase:last-child{border-bottom:0;}
+.phase .p{font-family:'Fraunces',serif;font-size:15px;white-space:nowrap;color:var(--soft);}
+.phase .d{font-size:14px;line-height:1.5;color:#3b3631;}
+.phase .d b{color:var(--ink);font-weight:500;}
+
+.foot{margin-top:44px;border-top:2px solid var(--ink);padding-top:22px;display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:16px;}
+.foot .big{font-family:'Fraunces',serif;font-weight:300;font-size:22px;letter-spacing:-0.01em;max-width:30ch;line-height:1.2;}
+
+/* qr motif */
+.qr{display:grid;grid-template-columns:repeat(7,7px);grid-auto-rows:7px;gap:2px;flex-shrink:0;}
+.qr i{background:var(--ink);}
+
+/* ---- cost page ---- */
+.opts{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:8px;}
+@media(max-width:820px){.opts{grid-template-columns:1fr;}}
+.opt-card{border:1px solid var(--line);background:var(--card);padding:22px 18px;display:flex;flex-direction:column;position:relative;}
+.opt-card.rec{border-color:var(--ink);}
+.opt-card .tag{position:absolute;top:-1px;right:-1px;background:var(--ink);color:#fff;font-size:9px;letter-spacing:0.18em;text-transform:uppercase;padding:5px 10px;font-weight:500;}
+.opt-card .nm{font-family:'Fraunces',serif;font-size:22px;font-weight:400;letter-spacing:-0.01em;}
+.opt-card .sc{font-size:12px;color:var(--soft);letter-spacing:0.03em;margin-top:3px;margin-bottom:16px;}
+.opt-card .amt{font-family:'Fraunces',serif;font-weight:300;font-size:33px;letter-spacing:-0.02em;line-height:1;}
+.opt-card .amt small{font-size:13px;color:var(--soft);font-family:'Archivo';letter-spacing:0.1em;}
+.opt-card ul{list-style:none;margin-top:18px;}
+.opt-card ul li{font-size:13px;line-height:1.4;padding:7px 0 7px 20px;position:relative;color:#3b3631;border-top:1px dashed var(--line);}
+.opt-card ul li:first-child{border-top:0;}
+.opt-card ul li:before{content:"+";position:absolute;left:0;top:7px;color:var(--soft);font-family:'Fraunces',serif;}
+
+.costrow{display:flex;justify-content:space-between;align-items:baseline;padding:13px 0;border-bottom:1px dashed var(--line);gap:16px;}
+.costrow .l{font-size:14px;color:#3b3631;}
+.costrow .l b{color:var(--ink);font-weight:500;}
+.costrow .l small{display:block;color:var(--soft);font-size:12px;margin-top:2px;letter-spacing:0.02em;}
+.costrow .v{font-family:'Fraunces',serif;font-size:17px;white-space:nowrap;}
+.costtot{display:flex;justify-content:space-between;align-items:center;margin-top:16px;padding-top:14px;border-top:2px solid var(--ink);}
+.costtot .l{font-family:'Archivo';letter-spacing:0.16em;text-transform:uppercase;font-size:12px;font-weight:500;}
+.costtot .v{font-family:'Fraunces',serif;font-size:26px;}
+.fineprint{font-size:11px;color:var(--soft);line-height:1.55;margin-top:20px;letter-spacing:0.02em;}
+.cmp{padding:22px 0;border-top:1px solid var(--line);}
+.cmp:first-of-type{margin-top:30px;}
+.cmp .top{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:12px;flex-wrap:wrap;}
+.cmp .nm{font-family:'Fraunces',serif;font-size:25px;font-weight:400;letter-spacing:-0.01em;}
+.cmp .nm .tag2{background:var(--ink);color:#fff;font-size:9px;letter-spacing:0.18em;text-transform:uppercase;padding:3px 8px;margin-left:10px;vertical-align:middle;font-weight:500;font-family:'Archivo';}
+.cmp .pr{font-family:'Fraunces',serif;font-size:21px;white-space:nowrap;}
+.cmp .blk{margin-bottom:9px;}
+.cmp .k{font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:var(--soft);font-weight:600;margin-bottom:2px;}
+.cmp .blk p{font-size:13.5px;line-height:1.58;color:#3b3631;max-width:66ch;}
+
+/* print btn */
+.printbtn{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;border:0;
+  font-family:'Archivo';font-size:11px;letter-spacing:0.2em;text-transform:uppercase;font-weight:500;
+  padding:13px 26px;border-radius:999px;cursor:pointer;box-shadow:0 12px 36px rgba(0,0,0,0.28);z-index:50;}
+.printbtn:hover{opacity:.88;}
+
+@media print{
+  body{background:#fff;padding:0;}
+  .sheet{box-shadow:none;max-width:none;padding:34px 40px;margin:0;}
+  .sheet.page2{break-before:page;page-break-before:always;}
+  .printbtn{display:none;}
+  .sec{padding:20px 0;}
+  h1{margin:18px 0 14px;}
+}
+</style>
+</head>
+<body>
+
+<!-- ============ PAGE 1 ============ -->
+<div class="sheet">
+
+  <div class="head">
+    <div><div class="mark">jb</div></div>
+    <div class="right">
+      <div class="label">Proposal</div>
+      <div style="font-size:12px;color:var(--soft);margin-top:6px;letter-spacing:0.04em;">Prepared for Joseph Bucci<br/>Photography · Hamilton, ON</div>
+      <div class="pg">Page 1 / 3</div>
+    </div>
+  </div>
+
+  <div class="label">A new home for your work</div>
+  <h1 class="serif">Your photographs, in your clients’ hands.</h1>
+  <p class="deck">
+    A brand-new website, built from the ground up: a private, branded space where the people you
+    photograph can view their images and order prints or digital files — opened with a single
+    <b>QR code</b> on a session card. Paired with a public site designed to get your work
+    <b>found on Google</b> by new clients in Hamilton.
+  </p>
+
+  <!-- 01 -->
+  <div class="sec">
+    <div class="no serif">01</div>
+    <div>
+      <h2 class="serif">The idea</h2>
+      <p>
+        After a shoot, every client receives a small card with a QR code. They scan it and land
+        in a gallery that looks and feels like <i>your</i> brand — clean, monochrome, your name on
+        every frame. They choose what they love and buy it on the spot. No emails back and forth,
+        no file transfers, no chasing payments.
+      </p>
+    </div>
+  </div>
+
+  <!-- 02 -->
+  <div class="sec">
+    <div class="no serif">02</div>
+    <div>
+      <h2 class="serif">What your clients experience</h2>
+      <ul class="flow">
+        <li><b>Scan</b> the QR code on their session card</li>
+        <li><b>Enter</b> a private gallery, branded to you</li>
+        <li><b>Browse</b> watermarked previews of their photographs</li>
+        <li><b>Buy</b> digital files or fine-art prints — by size</li>
+        <li><b>Receive</b> instant high-res downloads; prints shipped to the door</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 03 -->
+  <div class="sec">
+    <div class="no serif">03</div>
+    <div>
+      <h2 class="serif">What it does for you</h2>
+      <div class="two">
+        <ul class="flow">
+          <li>A separate gallery for each <b>session or event</b></li>
+          <li>A <b>QR code generated automatically</b> for every gallery</li>
+        </ul>
+        <ul class="flow">
+          <li>Payments handled by <b>Stripe</b> — funds land in your account</li>
+          <li>Galleries stay <b>private</b> — only the QR or link opens them</li>
+        </ul>
+      </div>
+      <div class="callout">
+        <b>A working prototype is already built.</b> You can walk through the full client journey —
+        and your studio side, with the QR codes — before a single decision is made.<br/>
+        <a href="https://joseph-demo.vercel.app/" style="color:var(--ink);font-weight:500;text-decoration:underline;">See it live → joseph-demo.vercel.app</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 04 -->
+  <div class="sec">
+    <div class="no serif">04</div>
+    <div>
+      <h2 class="serif">Getting found on Google</h2>
+      <p>
+        The client galleries above are private and stay <i>out</i> of search — that’s by design.
+        Being found on Google is a separate, public job, and here’s what actually moves the needle
+        for a local photographer:
+      </p>
+      <ul class="flow" style="margin-top:12px;">
+        <li><b>Google Business Profile</b> — the single biggest lever for “photographer Hamilton” and “near me” searches. Puts you on the map, with photos and reviews.</li>
+        <li><b>A public portfolio site built for search</b> — a dedicated page per service, fast-loading, mobile-first.</li>
+        <li><b>Local keywords</b> — Hamilton, Ontario, headshots, portraits — written into real page text, not just images.</li>
+        <li><b>Reviews &amp; local citations</b> — to earn Google’s trust that you’re the real, local choice.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 05 -->
+  <div class="sec">
+    <div class="no serif">05</div>
+    <div>
+      <h2 class="serif">How we’d roll it out</h2>
+      <div class="phase">
+        <div class="p serif">Phase 1</div>
+        <div class="d"><b>Be found.</b> Tune the public site for Google and set up the Business Profile, so new clients in Hamilton can discover you.</div>
+      </div>
+      <div class="phase">
+        <div class="p serif">Phase 2</div>
+        <div class="d"><b>Sell effortlessly.</b> Launch the private client galleries, QR codes, and checkout — turning every shoot into easy print &amp; digital sales.</div>
+      </div>
+      <p style="margin-top:14px;">
+        This is a complete rebuild — a brand-new site engineered from the ground up on a fast,
+        modern foundation that is fully yours. The only thing carried over from the current site is
+        <b>your photography</b>; everything else is designed fresh around the way you actually work.
+      </p>
+    </div>
+  </div>
+
+  <div class="foot">
+    <div class="big serif">Next step: a five-minute walkthrough of the live prototype.</div>
+    <div class="qr" aria-hidden="true" id="qr"></div>
+  </div>
+
+</div>
+
+<!-- ============ PAGE 2 — INVESTMENT & COSTS ============ -->
+<div class="sheet page2">
+
+  <div class="head">
+    <div><div class="mark">jb</div></div>
+    <div class="right">
+      <div class="label">Investment &amp; Costs</div>
+      <div style="font-size:12px;color:var(--soft);margin-top:6px;letter-spacing:0.04em;">Prepared for Joseph Bucci<br/>Photography · Hamilton, ON</div>
+      <div class="pg">Page 2 / 3</div>
+    </div>
+  </div>
+
+  <div class="label">Clear numbers, no surprises</div>
+  <h1 class="serif">What it costs.</h1>
+  <p class="deck">
+    A one-time build, then very low monthly running costs. You only pay a transaction fee
+    when you <b>actually sell</b> — so the site pays for itself as it earns.
+  </p>
+
+  <!-- A: the build -->
+  <div class="sec">
+    <div class="no serif">01</div>
+    <div>
+      <h2 class="serif">The build — one-time</h2>
+      <p style="margin-bottom:18px;">Built ground-up in a modern stack and fully owned by you. Choose the scope that fits — <b>these are special launch prices.</b></p>
+      <div class="opts">
+        <div class="opt-card">
+          <div class="nm serif">Studio Launch</div>
+          <div class="sc">Get online &amp; deliver galleries</div>
+          <div class="amt serif">$500 <small>CAD</small></div>
+          <ul>
+            <li>Branded homepage &amp; portfolio</li>
+            <li>Private client galleries + QR codes</li>
+            <li>Watermarked previews — view &amp; download</li>
+            <li>Mobile-first, your visual identity</li>
+          </ul>
+        </div>
+        <div class="opt-card rec">
+          <div class="tag">Suggested</div>
+          <div class="nm serif">Studio Pro</div>
+          <div class="sc">Run it yourself, sell prints</div>
+          <div class="amt serif">$1,200 <small>CAD</small></div>
+          <ul>
+            <li>Everything in Studio Launch</li>
+            <li>Online store — sell digital &amp; prints (Stripe)</li>
+            <li>Your dashboard: create galleries &amp; QR</li>
+            <li>Fine-art prints, multiple sizes, shipped</li>
+            <li>Expanded multi-page site + refined design</li>
+          </ul>
+        </div>
+        <div class="opt-card">
+          <div class="nm serif">Full Studio</div>
+          <div class="sc">Built to be found on Google</div>
+          <div class="amt serif">$2,000 <small>CAD</small></div>
+          <ul>
+            <li>Everything in Studio Pro</li>
+            <li>Full SEO build — a page per service</li>
+            <li>Google Business Profile setup</li>
+            <li>Fully custom, polished design</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- B: running -->
+  <div class="sec">
+    <div class="no serif">02</div>
+    <div>
+      <h2 class="serif">Running it — monthly</h2>
+      <div class="costrow">
+        <div class="l"><b>Domain</b><small>your josephbucci.com address</small></div>
+        <div class="v">~$2</div>
+      </div>
+      <div class="costrow">
+        <div class="l"><b>Hosting, database &amp; photo storage</b><small>scales with usage; free tier covers the start</small></div>
+        <div class="v">$10–35</div>
+      </div>
+      <div class="costrow">
+        <div class="l"><b>Order emails &amp; receipts</b><small>download links and confirmations</small></div>
+        <div class="v">Included</div>
+      </div>
+      <div class="costtot">
+        <div class="l">Typical monthly</div>
+        <div class="v serif">$10–35 / mo</div>
+      </div>
+      <div class="callout" style="margin-top:18px;">
+        <b>Optional care plan — from $95 / mo.</b> I handle hosting, backups, updates and help you
+        spin up a new gallery whenever you have a shoot, so you never touch the technical side.
+      </div>
+    </div>
+  </div>
+
+  <!-- C: when you sell -->
+  <div class="sec">
+    <div class="no serif">03</div>
+    <div>
+      <h2 class="serif">When you sell — per order</h2>
+      <p>
+        There’s no fee when nothing sells. On each sale, the payment processor (Stripe) takes a
+        standard share before the money reaches you:
+      </p>
+      <div class="costrow" style="margin-top:10px;">
+        <div class="l"><b>Stripe processing</b><small>Canadian cards · international cards +0.8%</small></div>
+        <div class="v">2.9% + $0.30</div>
+      </div>
+      <p style="margin-top:12px;color:var(--soft);font-size:13px;">
+        Example: on a <b style="color:var(--ink)">$60</b> print order, Stripe keeps about
+        <b style="color:var(--ink)">$2.04</b> — you receive ~$57.96.
+      </p>
+    </div>
+  </div>
+
+  <p class="fineprint">
+    All figures in Canadian dollars and current as of 2026. Monthly running costs depend on traffic
+    and the volume of photographs stored and downloaded; hosting providers bill in USD, so amounts
+    shown are approximate. Build options are fixed-scope quotes — anything beyond the listed scope is
+    agreed in advance, never billed by surprise.
+  </p>
+
+  <div class="foot">
+    <div class="big serif">Ready when you are — let’s pick a scope and a launch date.</div>
+  </div>
+
+</div>
+
+<!-- ============ PAGE 3 — IN PLAIN TERMS ============ -->
+<div class="sheet page2">
+
+  <div class="head">
+    <div><div class="mark">jb</div></div>
+    <div class="right">
+      <div class="label">How the levels compare</div>
+      <div style="font-size:12px;color:var(--soft);margin-top:6px;letter-spacing:0.04em;">Prepared for Joseph Bucci<br/>Photography · Hamilton, ON</div>
+      <div class="pg">Page 3 / 3</div>
+    </div>
+  </div>
+
+  <div class="label">In plain terms</div>
+  <h1 class="serif">Which level fits you.</h1>
+  <p class="deck">What each level actually means day to day — and who it’s for.</p>
+
+  <div class="cmp">
+    <div class="top">
+      <div class="nm serif">Studio Launch <span style="font-size:14px;color:var(--soft);font-family:'Archivo';letter-spacing:0.04em;">— deliver your work</span></div>
+      <div class="pr serif">$500</div>
+    </div>
+    <div class="blk"><div class="k">In practice</div><p>Your site goes live with your portfolio, and every client reaches their photos through a private gallery you share by QR code. They browse and download their images — a clean, professional way to hand over a shoot.</p></div>
+    <div class="blk"><div class="k">The advantage</div><p>The fastest, most affordable way to look professional online and deliver galleries beautifully.</p></div>
+    <div class="blk"><div class="k">Best for</div><p>Getting online and delivering to clients, with the lightest commitment.</p></div>
+  </div>
+
+  <div class="cmp">
+    <div class="top">
+      <div class="nm serif">Studio Pro <span class="tag2">Suggested</span></div>
+      <div class="pr serif">$1,200</div>
+    </div>
+    <div class="blk"><div class="k">In practice</div><p>You get your own dashboard: after a shoot you create a gallery, upload, and a QR code is generated instantly — no help needed. Clients can buy digital files and order fine-art prints shipped to their door, paid securely by card straight to you.</p></div>
+    <div class="blk"><div class="k">The advantage</div><p>You run everything yourself and open a new, higher-margin income stream through prints. The site grows with your business.</p></div>
+    <div class="blk"><div class="k">Best for</div><p>A working photographer who wants to manage it independently and earn more from every client.</p></div>
+  </div>
+
+  <div class="cmp">
+    <div class="top">
+      <div class="nm serif">Full Studio <span style="font-size:14px;color:var(--soft);font-family:'Archivo';letter-spacing:0.04em;">— get found</span></div>
+      <div class="pr serif">$2,000</div>
+    </div>
+    <div class="blk"><div class="k">In practice</div><p>Everything in Pro, plus a full website tuned to rank on Google — a page for each service — and your Google Business Profile set up, so when someone in Hamilton searches for a photographer, you appear.</p></div>
+    <div class="blk"><div class="k">The advantage</div><p>Turns the site from a tool for existing clients into one that brings in new ones. The best long-term return — your Google presence compounds over time.</p></div>
+    <div class="blk"><div class="k">Best for</div><p>Growing the business and getting discovered, not just serving people you already know.</p></div>
+  </div>
+
+  <div class="callout" style="margin-top:22px;">
+    <b>In short —</b> Launch: deliver to the clients you already have. Pro: run it yourself and sell prints. Full: get found by new clients on Google.
+  </div>
+
+  <div class="foot">
+    <div class="big serif">Not sure which fits? I’ll gladly walk you through it.</div>
+  </div>
+
+</div>
+
+<button class="printbtn" onclick="window.print()">Save as PDF</button>
+
+<script>
+  var qr = document.getElementById('qr');
+  function corner(r,c){ return (r<3&&c<3)||(r<3&&c>3)||(r>3&&c<3); }
+  var s = 12345;
+  for(var r=0;r<7;r++)for(var c=0;c<7;c++){
+    var i=document.createElement('i');
+    s=(s*1103515245+12345)&0x7fffffff;
+    var on = corner(r,c) ? !((r===1&&c>=4&&c<=5)||(c===1&&r>=4&&r<=5)||(r===1&&c===1)) : (s/0x7fffffff>0.5);
+    if(!on) i.style.background='transparent';
+    qr.appendChild(i);
+  }
+</script>
+</body>
+</html>
